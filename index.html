@@ -3,156 +3,350 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NON-ESCALATOR RELATIONSHIP MENU - YOUNG, NON-MONOGAMOUS EDITION</title>
+    <title>NON-ESCALATOR ENM RELATIONSHIP MENU</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+        
         body {
-            font-family: 'Arial', sans-serif;
-            max-width: 800px;
+            font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             margin: 0 auto;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        h1 {
-            color: #333;
+            padding: 15px;
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 50%, #fd79a8 100%);
+            min-height: 100vh;
+            line-height: 1.4;
+            max-width: 100%;
             text-align: center;
-            margin-bottom: 10px; /* Adjusted margin */
         }
+        
+        h1 {
+            color: #2d3436;
+            text-align: center;
+            margin: 0 0 20px 0;
+            font-size: 1.6em;
+            padding: 0 10px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(255,255,255,0.5);
+            letter-spacing: -0.5px;
+        }
+        
+        .language-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(10px);
+            border: none;
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 0.9em;
+            font-weight: 600;
+            color: #2d3436;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .language-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+        
         .partner-names {
             text-align: center;
             margin-bottom: 30px;
-            font-size: 1.1em;
-            color: #555;
+            font-size: 1em;
+            color: #2d3436;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
         }
-        body {
-            width: 100%;
-            max-width: 800px;
-            min-height: 100vh;
-            padding: 10px;
+        
+        .partner-names span {
+            font-size: 1.2em;
+            font-weight: 600;
         }
         
         .partner-names input[type="text"] {
-            width: 90%;
-            max-width: 150px;
-            margin: 5px auto;
+            width: 100%;
+            max-width: 200px;
+            padding: 14px 18px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            text-align: center;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .partner-names input[type="text"]:focus {
+            outline: none;
+            background: rgba(255,255,255,1);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
         }
         
         .legend {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        @media (max-width: 600px) {
-            .options {
-                flex-direction: column;
-            }
-            
-            .item {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-        
-            .export-buttons {
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-            }
-        
-            .export-buttons button {
-                margin: 5px 0;
-                padding: 12px;
-                min-height: 44px; /* Better touch target */
-            }
-        }
-        background-color: #fff;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .legend span {
-            margin-right: 20px;
-        }
-        .section {
-            background-color: #fff;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(15px);
             padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 16px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            font-size: 1em;
+            text-align: center;
         }
-        h2 {
-            color: #2c3e50;
-            margin-top: 0;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-        }
-        .item {
-            margin: 10px 0;
+        
+        .legend span {
             display: flex;
             align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.1em;
         }
+        
+        .section {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(15px);
+            padding: 25px 20px;
+            margin-bottom: 20px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        h2 {
+            color: #2c3e50;
+            margin: 0 0 25px 0;
+            border-bottom: 2px solid rgba(44, 62, 80, 0.1);
+            padding-bottom: 15px;
+            font-size: 1.3em;
+            text-align: center;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+        
+        .item {
+            margin: 18px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 20px 18px;
+            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+            border-radius: 12px;
+            border: 1px solid rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+        
+        .item-text {
+            font-size: 1.1em;
+            color: #333;
+            font-weight: 500;
+            text-align: center;
+            line-height: 1.5;
+        }
+        
         .options {
             display: flex;
             gap: 10px;
-            margin-right: 15px;
+            justify-content: center;
         }
+        
         .option {
             cursor: pointer;
-            padding: 5px 10px;
-            border: 1px solid #ddd;
-            border-radius: 3px;
-            transition: all 0.3s;
+            padding: 10px 12px;
+            border: 2px solid #e0e6ed;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1.2em;
+            font-weight: 600;
+            min-width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(145deg, #fff, #f8f9fa);
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
+        
         .option:hover {
-            background-color: #f0f0f0;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border-color: #fd79a8;
         }
+        
+        .option:active {
+            transform: translateY(0) scale(0.98);
+        }
+        
         .option.selected {
-            background-color: #000 !important;
+            background: linear-gradient(135deg, #fd79a8, #fdcb6e) !important;
             color: #fff !important;
+            border-color: #fd79a8 !important;
+            box-shadow: 0 6px 20px rgba(253, 121, 168, 0.4) !important;
+            transform: translateY(-2px) scale(1.1);
             -webkit-print-color-adjust: exact;
             print-color-adjust: exact;
         }
-
+        
+        .custom-item input {
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            border-radius: 12px;
+            padding: 14px 16px;
+            width: 100%;
+            font-size: 16px;
+            background: rgba(255,255,255,0.9);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .custom-item input:focus {
+            outline: none;
+            border-color: #667eea;
+            background: rgba(255,255,255,1);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-1px);
+        }
+        
+        .export-buttons {
+            position: sticky;
+            bottom: 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            padding: 20px 15px;
+            margin: 30px -15px -15px -15px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 -8px 32px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .export-buttons button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 16px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1em;
+            font-weight: 600;
+            min-height: 52px;
+            -webkit-tap-highlight-color: transparent;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            letter-spacing: 0.5px;
+        }
+        
+        .export-buttons button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .export-buttons button:active {
+            transform: translateY(-1px);
+        }
+        
+        /* Desktop styles */
+        @media (min-width: 768px) {
+            body {
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 30px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+                margin-bottom: 15px;
+            }
+            
+            .partner-names {
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .legend {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+            
+            .legend span {
+                margin-right: 0;
+            }
+            
+            .item {
+                flex-direction: row;
+                align-items: center;
+                gap: 15px;
+                padding: 12px 15px;
+            }
+            
+            .item-text {
+                flex: 1;
+            }
+            
+            .options {
+                justify-content: flex-end;
+            }
+            
+            .export-buttons {
+                position: static;
+                flex-direction: row;
+                justify-content: center;
+                margin: 30px 0 0 0;
+                padding: 20px;
+                border-top: none;
+                box-shadow: none;
+                background-color: transparent;
+            }
+            
+            .export-buttons button {
+                min-height: auto;
+                padding: 12px 24px;
+            }
+        }
+        
         @media print {
             .option.selected {
                 border: 2px solid #000 !important;
                 font-weight: bold;
+                background-color: #000 !important;
+                color: #fff !important;
             }
-        }
-        .custom-item input {
-            border: none;
-            border-bottom: 1px solid #ddd;
-            padding: 5px;
-            margin-left: 10px;
-            width: 300px;
-        }
-        .export-buttons {
-            text-align: center;
-            margin: 20px 0;
-            padding: 20px;
-        }
-    
-        .export-buttons button {
-            background-color: #2c3e50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            margin: 0 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-    
-        .export-buttons button:hover {
-            background-color: #34495e;
-            transform: translateY(-2px);
+            
+            .export-buttons {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
     <h1>NON-ESCALATOR RELATIONSHIP MENU - YOUNG, NON-MONOGAMOUS EDITION</h1>
     <div class="partner-names">
-        <input type="text" placeholder="Partner 1 Name"> & <input type="text" placeholder="Partner 2 Name">
+        <input type="text" placeholder="Partner 1 Name">
+        <span>&</span>
+        <input type="text" placeholder="Partner 2 Name">
     </div>
     
     <div class="legend">
@@ -199,6 +393,11 @@
         <h2>MISCELLANEOUS</h2>
     </div>
 
+    <div class="export-buttons">
+        <button onclick="window.print()">Export to PDF</button>
+        <button onclick="exportToExcel()">Export to Excel</button>
+    </div>
+
     <script>
         const menuData = {
             connection: [
@@ -226,7 +425,7 @@
             ],
             social: [
                 'Hanging out with mutual friends',
-                'Meeting metamours (partners\' partners) if comfortable',  // Fixed the apostrophe
+                'Meeting metamours (partners\' partners) if comfortable',
                 'Casual group events / parties together',
                 'Tagging or mentioning each other on social media',
                 'Attending festivals / concerts as a group',
@@ -237,7 +436,7 @@
             ],
             autonomy: [
                 'Maintaining independent friendships',
-                'Supporting each other\'s personal goals / careers',  // Fixed the apostrophe
+                'Supporting each other\'s personal goals / careers',
                 'Balance of together & alone time',
                 'Freedom to travel or move independently',
                 'Equal say in relationship decisions',
@@ -306,6 +505,20 @@
             const item = document.createElement('div');
             item.className = 'item';
 
+            if (isCustom) {
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.placeholder = 'Add your own item...';
+                input.className = 'custom-item';
+                item.appendChild(input);
+                item.className = 'item custom-item';
+            } else {
+                const textDiv = document.createElement('div');
+                textDiv.className = 'item-text';
+                textDiv.textContent = text;
+                item.appendChild(textDiv);
+            }
+
             const optionsDiv = document.createElement('div');
             optionsDiv.className = 'options';
 
@@ -321,19 +534,6 @@
             });
 
             item.appendChild(optionsDiv);
-
-            if (isCustom) {
-                const input = document.createElement('input');
-                input.type = 'text';
-                input.placeholder = 'Custom item...';
-                item.appendChild(input);
-                item.className = 'item custom-item';
-            } else {
-                const span = document.createElement('span');
-                span.textContent = text;
-                item.appendChild(span);
-            }
-
             return item;
         }
 
@@ -348,52 +548,6 @@
         Object.keys(menuData).forEach(sectionId => {
             initializeSection(sectionId, menuData[sectionId]);
         });
-
-        async function exportToPDF() {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF('p', 'pt', 'a4');
-            const sections = document.querySelectorAll('.section');
-            let currentPage = 1;
-            let yOffset = 0;
-            const pageHeight = doc.internal.pageSize.height;
-            const margin = 40;
-        
-            // Add title
-            const title = document.querySelector('h1');
-            await html2canvas(title).then(canvas => {
-                const imgData = canvas.toDataURL('image/png');
-                doc.addImage(imgData, 'PNG', margin, yOffset, canvas.width * 0.75, canvas.height * 0.75);
-                yOffset += canvas.height * 0.75 + 20;
-            });
-        
-            // Add legend
-            const legend = document.querySelector('.legend');
-            await html2canvas(legend).then(canvas => {
-                const imgData = canvas.toDataURL('image/png');
-                doc.addImage(imgData, 'PNG', margin, yOffset, canvas.width * 0.75, canvas.height * 0.75);
-                yOffset += canvas.height * 0.75 + 20;
-            });
-        
-            // Process each section
-            for (const section of sections) {
-                await html2canvas(section).then(canvas => {
-                    const imgData = canvas.toDataURL('image/png');
-                    const imgHeight = canvas.height * 0.75;
-        
-                    // Check if we need a new page
-                    if (yOffset + imgHeight > pageHeight - margin) {
-                        doc.addPage();
-                        currentPage++;
-                        yOffset = margin;
-                    }
-        
-                    doc.addImage(imgData, 'PNG', margin, yOffset, canvas.width * 0.75, imgHeight);
-                    yOffset += imgHeight + 20;
-                });
-            }
-        
-            doc.save('relationship-menu.pdf');
-        }
     
         function exportToExcel() {
             const wb = XLSX.utils.book_new();
@@ -410,7 +564,7 @@
                 const items = section.querySelectorAll('.item');
                 items.forEach(item => {
                     const selected = item.querySelector('.selected');
-                    const text = item.querySelector('input')?.value || item.textContent.trim();
+                    const text = item.querySelector('input')?.value || item.querySelector('.item-text')?.textContent?.trim();
                     const mark = selected ? selected.textContent : '';
                     
                     if (text) {
@@ -424,15 +578,6 @@
             XLSX.writeFile(wb, 'relationship-menu.xlsx');
         }
     </script>
-    <!-- Remove these script tags as they're no longer needed -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script> -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-    
-    <!-- Add this button div before the closing body tag -->
-    <div class="export-buttons">
-        <button onclick="window.print()">Export to PDF</button>
-        <button onclick="exportToExcel()">Export to Excel</button>
-    </div>
 </body>
 </html>
