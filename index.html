@@ -135,7 +135,7 @@
             border-bottom: 2px solid rgba(108,117,125,0.2);
             padding-bottom: 15px;
             font-size: 1.3em;
-            text-align: center;
+            text-align: left; /* 从center改为left */
             font-weight: 700;
             letter-spacing: -0.3px;
         }
@@ -162,8 +162,33 @@
             font-size: 1.1em;
             color: #495057;
             font-weight: 500;
-            text-align: center;
+            text-align: left; /* 从center改为left */
             line-height: 1.5;
+        }
+        
+        .info-banner {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(15px);
+            padding: 15px 20px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            border: 2px solid rgba(108,117,125,0.2);
+            font-size: 0.95em;
+            color: #495057;
+            line-height: 1.5;
+            text-align: left; /* 已经是left，保持不变 */
+        }
+        
+        h2 {
+            color: #495057;
+            margin: 0 0 25px 0;
+            border-bottom: 2px solid rgba(108,117,125,0.2);
+            padding-bottom: 15px;
+            font-size: 1.3em;
+            text-align: left; /* 从center改为left */
+            font-weight: 700;
+            letter-spacing: -0.3px;
         }
         
         .options {
@@ -243,33 +268,27 @@
             border-top: 2px solid rgba(108,117,125,0.2);
             box-shadow: 0 -8px 32px rgba(0,0,0,0.1);
             display: flex;
-            flex-direction: column;
-            gap: 15px;
+            flex-direction: row; /* 改为横向排列 */
+            justify-content: center; /* 居中对齐 */
+            gap: 10px; /* 减小间距 */
         }
         
         .export-buttons button {
             background: linear-gradient(135deg, #6c757d, #495057);
             color: white;
             border: none;
-            padding: 16px 24px;
+            padding: 12px 16px; /* 减小内边距 */
             border-radius: 25px;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            font-size: 1em;
+            font-size: 0.9em; /* 减小字体大小 */
             font-weight: 600;
-            min-height: 52px;
+            min-height: 44px; /* 减小最小高度 */
             -webkit-tap-highlight-color: transparent;
             box-shadow: 0 4px 15px rgba(108,117,125,0.3);
             letter-spacing: 0.5px;
-        }
-        
-        .export-buttons button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(108,117,125,0.4);
-        }
-        
-        .export-buttons button:active {
-            transform: translateY(-1px);
+            flex: 1; /* 让按钮平均分配空间 */
+            max-width: 45%; /* 限制最大宽度 */
         }
         
         /* Desktop styles */
@@ -326,11 +345,15 @@
                 border-top: none;
                 box-shadow: none;
                 background-color: transparent;
+                gap: 15px; /* 恢复间距 */
             }
             
             .export-buttons button {
                 min-height: auto;
                 padding: 12px 24px;
+                font-size: 1em; /* 恢复字体大小 */
+                flex: none; /* 取消弹性布局 */
+                max-width: none; /* 取消最大宽度限制 */
             }
         }
         
@@ -342,7 +365,7 @@
                 color: #fff !important;
             }
             
-            .export-buttons, .language-toggle {
+            .export-buttons, .language-toggle, .info-banner {
                 display: none;
             }
         }
@@ -351,11 +374,16 @@
 <body>
     <button class="language-toggle" onclick="toggleLanguage()">中文</button>
     
-    <h1 id="title">NON-ESCALATOR ENM RELATIONSHIP MENU</h1>
+    <h1 id="title">NON-ESCALATOR RELATIONSHIP MENU</h1>
     <div class="partner-names">
         <input type="text" id="partner1" placeholder="Partner 1 Name">
         <span>&</span>
         <input type="text" id="partner2" placeholder="Partner 2 Name">
+    </div>
+    
+    <div class="info-banner">
+        <p id="info-text"><strong>Note:</strong> This menu is a starting point for conversation, not a fixed list of commitments. All items can be customized to your relationship. Double-click any item to edit it.</p>
+        <p id="deescalation-text"><strong>Relationship Fluidity:</strong> Relationships can naturally evolve over time, including becoming less intense or transitioning to friendship. This is a normal part of relating and doesn't represent failure.</p>
     </div>
     
     <div class="legend">
@@ -412,7 +440,7 @@
         
         const translations = {
             en: {
-                title: 'NON-ESCALATOR ENM RELATIONSHIP MENU',
+                title: 'NON-ESCALATOR RELATIONSHIP MENU',
                 partner1: 'Partner 1 Name',
                 partner2: 'Partner 2 Name',
                 legendMust: '■ Must Have',
@@ -430,227 +458,249 @@
                 miscellaneousTitle: 'MISCELLANEOUS',
                 exportPdf: 'Export to PDF',
                 exportExcel: 'Export to Excel',
-                customPlaceholder: 'Add your own item...'
+                customPlaceholder: 'Add your own item...',
+                infoText: '<strong>Note:</strong> This menu is a starting point for conversation, not a fixed list of commitments. All items can be customized to your relationship. Double-click any item to edit it.',
+                deescalationText: '<strong>Relationship Fluidity:</strong> Relationships can naturally evolve over time, including becoming less intense or transitioning to friendship. This is a normal part of relating and doesn\'t represent failure.'
             },
             zh: {
-                title: '自定义开放式关系协议',
+                title: '去阶梯化关系协定菜单',
                 partner1: '伴侣1姓名',
                 partner2: '伴侣2姓名',
                 legendMust: '■ 必须有',
                 legendLike: '♥ 希望有',
                 legendMaybe: '? 也许',
                 legendOff: '✘ 禁止',
-                connectionTitle: '信任连接',
-                emotionalTitle: '情感支持',
-                socialTitle: '社交互动',
-                physicalTitle: '亲密行为',
+                connectionTitle: '连接与协定',
+                emotionalTitle: '情感亲密度',
+                socialTitle: '社交融合',
+                physicalTitle: '身体亲密与性健康',
                 communicationTitle: '沟通方式',
                 qualityTitle: '优质时光',
-                financialTitle: '财务协议',
+                financialTitle: '财务事项',
                 autonomyTitle: '个人自主',
                 miscellaneousTitle: '其他事项',
                 exportPdf: '导出为PDF',
                 exportExcel: '导出为Excel',
-                customPlaceholder: '添加您自己的项目...'
+                customPlaceholder: '添加您自己的项目...',
+                infoText: '<strong>注意：</strong>此菜单是对话的起点，而非固定的承诺清单。所有条目都可以根据你们的关系进行自定义。双击任何条目可以编辑。',
+                deescalationText: '<strong>关系流动性：</strong>关系可以随时间自然演变，包括变得不那么紧密或转变为友谊。这是关系的正常部分，并不代表失败。'
             }
         };
 
         const menuData = {
             en: {
                 connection: [
-                    'Transparency about other partners / dating apps',
-                    'Consistency in planned meet-ups',
-                    'Honesty about feelings & boundaries',
-                    'Commitment to safer-sex practices (barriers, testing cadence)',
-                    'Regular renegotiation of agreements',
-                    'Emotional responsibility (owning impact, not blame)',
-                    'Clarity on exclusivity expectations (e.g., none / partial)',
-                    '',
+                    'Transparency about other partners/dating apps (weekly updates)',
+                    'Consistency in planned meet-ups (2-3 times per week)',
+                    'Honesty about feelings & boundaries (ongoing dialogue)',
+                    'Safer-sex agreements (barriers with new partners, testing every 3 months)',
+                    'Regular check-ins on our agreements (monthly)',
+                    'Emotional responsibility (owning impact without blame)',
+                    'Clarity on exclusivity expectations (e.g., none/partial/specific activities)',
+                    'Comfort with relationship evolution (including de-escalation)',
+                    'Respecting each other\'s pace of emotional connection',
                     ''
                 ],
                 emotional: [
-                    'Sharing joys & frustrations',
-                    'Offering support during rough days',
-                    'Willingness to be vulnerable',
-                    'Sharing personal growth goals',
-                    'Check-ins about feelings after seeing others',
-                    'Respecting emotional boundaries & space',
-                    'Discussing mental-health needs',
-                    'Using chosen endearments / pet names',
-                    '',
+                    'Sharing joys & frustrations (daily/weekly check-ins)',
+                    'Offering support during rough days (as needed, within capacity)',
+                    'Willingness to be vulnerable (at comfortable pace)',
+                    'Sharing personal growth goals (monthly reflections)',
+                    'Check-ins about feelings after seeing others (within 24-48 hours)',
+                    'Respecting emotional boundaries & space (asking before deep discussions)',
+                    'Discussing mental-health needs (proactive communication)',
+                    'Using chosen endearments/pet names (establishing preferences)',
+                    'Celebrating each other\'s successes (active acknowledgment)',
+                    'Space for processing jealousy without judgment',
                     ''
                 ],
                 social: [
-                    'Hanging out with mutual friends',
-                    'Meeting metamours (partners\' partners) if comfortable',
-                    'Casual group events / parties together',
-                    'Tagging or mentioning each other on social media',
-                    'Attending festivals / concerts as a group',
-                    'Remaining private from family or professional circles',
-                    'Vacationing with friend groups',
-                    '',
+                    'Hanging out with mutual friends (frequency preferences)',
+                    'Meeting metamours if comfortable (no timeline pressure)',
+                    'Casual group events/parties together (monthly)',
+                    'Social media boundaries (comfort with tagging/posting)',
+                    'Attending festivals/concerts as a group (seasonal)',
+                    'Privacy boundaries with family/professional circles',
+                    'Vacationing with friend groups (annual/semi-annual)',
+                    'How we introduce each other to others (preferred terms)',
+                    'Comfort level with PDA in different social contexts',
                     ''
                 ],
                 autonomy: [
-                    'Maintaining independent friendships',
-                    'Supporting each other\'s personal goals / careers',
-                    'Balance of together & alone time',
-                    'Freedom to travel or move independently',
-                    'Equal say in relationship decisions',
-                    '',
+                    'Maintaining independent friendships (weekly solo social time)',
+                    'Supporting each other\'s personal goals/careers (active encouragement)',
+                    'Balance of together & alone time (2:1 ratio, etc.)',
+                    'Freedom to travel or move independently (communication expectations)',
+                    'Equal say in relationship decisions (consensus-based approach)',
+                    'Personal space needs (hours/days per week)',
+                    'Independent decision-making boundaries (what requires consultation)',
+                    'Comfort with spontaneous plans with others',
                     ''
                 ],
                 miscellaneous: [
-                    'Pet-sitting or plant-sitting for each other',
+                    'Pet-sitting or plant-sitting for each other (as needed)',
                     'Creative collaborations (music, art, projects)',
-                    'Sharing playlists / book recommendations',
-                    'Wellness support (workouts, meditation)',
-                    '',
-                    '',
+                    'Sharing playlists/book recommendations (frequency)',
+                    'Wellness support (joint workouts, meditation practice)',
+                    'Skill sharing and learning together (monthly skill exchange)',
+                    'Spiritual or mindfulness practices (respecting differences)',
+                    'Environmental/lifestyle compatibility (cleaning, sleep habits)',
                     ''
                 ],
                 physical: [
-                    'Kissing / cuddling',
-                    'Manual / oral sex',
-                    'Penetrative sex',
-                    'Exploring kinks / fantasies',
-                    'Mutual masturbation or toy play',
-                    'Regular STI testing (e.g., every 3 months)',
-                    'Condom / barrier use',
-                    'Sleepovers',
-                    'Consent & comfort check-ins during intimacy',
-                    'Aftercare as needed',
-                    '',
+                    'Kissing/cuddling comfort levels and frequency',
+                    'Manual/oral sex boundaries and preferences',
+                    'Penetrative sex frequency and boundaries',
+                    'Exploring kinks/fantasies (communication process)',
+                    'Mutual masturbation or toy play comfort',
+                    'STI testing schedule (every 3-6 months)',
+                    'Barrier use agreements (with whom, for what activities)',
+                    'Sleepover frequency (weekly, monthly, etc.)',
+                    'Consent & comfort check-ins during intimacy (verbal/non-verbal)',
+                    'Aftercare needs and preferences (touch, space, conversation)',
+                    'Physical affection in public settings (boundaries)',
                     ''
                 ],
                 communication: [
-                    'Daily or frequent text check-ins',
-                    'Video / voice calls when apart',
-                    'Sharing memes / hobbies',
-                    'Debriefing after dates with others (optional)',
-                    'Respectful conflict resolution',
-                    'Scheduling via shared calendar',
-                    'Radical honesty delivered with care',
-                    'Expected response time guidelines',
-                    '',
+                    'Text check-ins (daily, every few days, etc.)',
+                    'Video/voice calls when apart (frequency expectations)',
+                    'Sharing interests and daily experiences (depth preferences)',
+                    'Debriefing after dates with others (detail level, timing)',
+                    'Conflict resolution approach (cooling off period, format)',
+                    'Calendar sharing for scheduling (digital tools, update frequency)',
+                    'Honesty delivery method (direct, gentle, written)',
+                    'Response time expectations (urgent vs. casual messages)',
+                    'Communication during busy periods (minimum check-ins)',
+                    'Language for expressing needs vs. demands',
                     ''
                 ],
                 quality: [
-                    'Regularly scheduled dates',
-                    'Spontaneous hangouts',
-                    'Shared hobbies (e.g., climbing, gaming, music)',
-                    'Weekend trips / festivals',
-                    'Cooking or movie nights at home',
-                    'Attending workshops / classes together',
-                    '',
+                    'Scheduled date nights (weekly, bi-weekly)',
+                    'Spontaneous hangouts (comfort with last-minute plans)',
+                    'Shared hobbies practice (climbing, gaming, music - frequency)',
+                    'Weekend trips frequency (monthly, quarterly)',
+                    'Home activities (cooking, movies - weekly rotation)',
+                    'Learning together (workshops, classes - quarterly)',
+                    'Special occasion celebrations (birthdays, anniversaries)',
+                    'Trying new experiences together (monthly adventure)',
                     ''
                 ],
                 financial: [
-                    'Splitting costs equitably (50/50, sliding scale, etc.)',
-                    'Alternating who pays for dates',
-                    'Small gifts or experiences',
-                    'No shared bank accounts',
-                    'Discussing large expenses in advance',
-                    '',
+                    'Cost sharing approach (50/50, proportional to income)',
+                    'Date payment pattern (alternating, treating on special occasions)',
+                    'Gift-giving expectations (budget ranges, occasions)',
+                    'Financial boundaries (no shared accounts, loans)',
+                    'Transparency about spending on shared activities',
+                    'Vacation/trip cost division (planning method)',
+                    'Supporting during financial hardship (boundaries)',
                     ''
                 ]
             },
             zh: {
                 connection: [
-                     '对其他伴侣/交友软件保持透明',
-            '按计划定期见面',
-            '坦诚表达感受与边界',
-            '安全性行为承诺（防护措施、检测频率）',
-            '定期重新协商协议',
-            '情感责任（承担影响，而非指责）',
-            '明确排他性期待（如无/部分）',
-                    '',
+                    '对其他伴侣/交友软件的透明度（每周更新）',
+                    '按计划见面的一致性（每周2-3次）',
+                    '坦诚表达感受与边界（持续对话）',
+                    '安全性行为协定（新伴侣使用屏障，每3个月检测）',
+                    '定期检视我们的协定（每月一次）',
+                    '情感责任（承担影响而非指责）',
+                    '明确排他性期待（如无/部分/特定活动）',
+                    '接受关系演变（包括关系降级）',
+                    '尊重彼此情感连接的节奏',
                     ''
                 ],
                 emotional: [
-                     '分享快乐与烦恼',
-            '困难时期提供支持',
-            '愿意展现脆弱面',
-            '分享个人成长目标',
-            '与他人约会后的情绪沟通',
-            '尊重情感边界与空间',
-            '讨论心理健康需求',
-            '使用专属亲密昵称',
-                    '',
+                    '分享快乐与烦恼（每日/每周交流）',
+                    '困难时期提供支持（根据需要，在能力范围内）',
+                    '愿意展现脆弱面（按舒适节奏）',
+                    '分享个人成长目标（每月反思）',
+                    '与他人约会后的情绪沟通（24-48小时内）',
+                    '尊重情感边界与空间（深入讨论前先询问）',
+                    '讨论心理健康需求（主动沟通）',
+                    '使用选定的亲密称呼（确立偏好）',
+                    '庆祝彼此的成功（积极认可）',
+                    '提供处理嫉妒情绪的无判断空间',
                     ''
                 ],
                 social: [
-                     '与共同朋友聚会',
-            '舒适前提下见元伴侣（伴侣的伴侣）',
-            '共同参与休闲集体活动/派对',
-            '在社交媒体上标记或提及对方',
-            '组队参加音乐节/演唱会',
-            '对家人或工作圈保持隐私',
-            '与朋友团体旅行',
-                    '',
+                    '与共同朋友相处（频率偏好）',
+                    '在舒适情况下见元伴侣（无时间压力）',
+                    '一起参加休闲集体活动/派对（每月）',
+                    '社交媒体边界（对标记/发布的舒适度）',
+                    '组队参加音乐节/演唱会（季节性）',
+                    '对家人/工作圈的隐私边界',
+                    '与朋友团体旅行（每年/半年一次）',
+                    '如何向他人介绍对方（首选称谓）',
+                    '不同社交场合中公开亲密行为的舒适度',
                     ''
                 ],
                 autonomy: [
-                    '保持独立友谊圈',
-            '支持彼此个人目标/事业',
-            '独处与共处时间平衡',
-            '自由旅行或独立搬迁',
-            '关系决策平等话语权',
-                    '',
+                    '保持独立友谊圈（每周独处社交时间）',
+                    '支持彼此个人目标/事业（积极鼓励）',
+                    '独处与共处时间平衡（2:1比例等）',
+                    '自由旅行或独立搬迁（沟通期望）',
+                    '关系决策平等话语权（基于共识的方法）',
+                    '个人空间需求（每周小时/天数）',
+                    '独立决策边界（哪些需要商议）',
+                    '对与他人的即兴计划的舒适度',
                     ''
                 ],
                 miscellaneous: [
-                   '互相照顾宠物/植物',
-            '创意合作（音乐、艺术、项目）',
-            '分享歌单/书单',
-            '健康互助（健身、冥想）',
-                    '',
-                    '',
+                    '互相照顾宠物/植物（根据需要）',
+                    '创意合作（音乐、艺术、项目）',
+                    '分享歌单/书单（频率）',
+                    '健康互助（共同锻炼、冥想练习）',
+                    '技能分享与共同学习（每月技能交流）',
+                    '精神或正念实践（尊重差异）',
+                    '环境/生活方式兼容性（清洁、睡眠习惯）',
                     ''
                 ],
                 physical: [
-                     '接吻/拥抱',
-            '手/口行为',
-            '插入式性行为',
-            '探索特殊癖好/幻想',
-            '互助自慰或玩具使用',
-            '定期性传播感染检测（如每3个月）',
-            '使用安全套/屏障保护',
-            '过夜留宿',
-            '亲密行为前确认同意与舒适度',
-            '按需事后关怀',
-                    '',
+                    '接吻/拥抱的舒适度和频率',
+                    '手动/口腔性行为的边界和偏好',
+                    '插入式性行为的频率和边界',
+                    '探索特殊癖好/幻想（沟通过程）',
+                    '互助自慰或玩具使用的舒适度',
+                    '性传播感染检测时间表（每3-6个月）',
+                    '屏障使用协定（与谁，哪些活动）',
+                    '过夜频率（每周、每月等）',
+                    '亲密行为中的同意与舒适度确认（语言/非语言）',
+                    '事后关怀需求和偏好（触摸、空间、交谈）',
+                    '公共场合的身体亲密度（边界）',
                     ''
                 ],
                 communication: [
-                   '每日/高频文字沟通',
-            '异地时视频/语音通话',
-            '分享表情包/兴趣爱好',
-            '选择性分享他人约会细节',
-            '建设性解决冲突',
-            '共享日历协调日程',
-            '谨慎表达的绝对坦诚',
-            '约定回复时效标准',
-                    '',
+                    '文字交流（每天、每隔几天等）',
+                    '分开时的视频/语音通话（频率期望）',
+                    '分享兴趣和日常经历（深度偏好）',
+                    '与他人约会后的交流（细节程度、时机）',
+                    '冲突解决方法（冷静期、形式）',
+                    '日程共享（数字工具、更新频率）',
+                    '诚实表达方式（直接、温和、书面）',
+                    '回复时间期望（紧急与日常消息）',
+                    '忙碌期间的沟通（最低交流）',
+                    '表达需求与要求的语言区分',
                     ''
                 ],
                 quality: [
-                    '固定约会日',
-            '临时见面',
-            '共同爱好（攀岩、游戏、音乐等）',
-            '周末短途/节日活动',
-            '家庭电影晚餐夜',
-            '一起参加课程/工作坊',
-                    '',
+                    '固定约会夜（每周、两周一次）',
+                    '即兴相聚（对临时计划的舒适度）',
+                    '共同爱好实践（攀岩、游戏、音乐-频率）',
+                    '周末旅行频率（每月、每季度）',
+                    '家庭活动（烹饪、电影-每周轮换）',
+                    '共同学习（工作坊、课程-每季度）',
+                    '特殊场合庆祝（生日、纪念日）',
+                    '一起尝试新体验（每月冒险）',
                     ''
                 ],
                 financial: [
-                     '公平分摊费用（AA制、浮动比例等）',
-            '轮流支付约会开销',
-            '小额礼物或体验消费',
-            '不设共同银行账户',
-            '大额支出提前协商',
-                    '',
+                    '费用分担方式（50/50、按收入比例）',
+                    '约会付款模式（轮流、特殊场合款待）',
+                    '送礼期望（预算范围、场合）',
+                    '财务边界（无共享账户、借贷）',
+                    '共享活动支出的透明度',
+                    '假期/旅行费用分配（规划方法）',
+                    '财务困难时的支持（边界）',
                     ''
                 ]
             }
@@ -695,6 +745,8 @@
             document.getElementById('miscellaneous-title').textContent = lang.miscellaneousTitle;
             document.getElementById('export-pdf').textContent = lang.exportPdf;
             document.getElementById('export-excel').textContent = lang.exportExcel;
+            document.getElementById('info-text').innerHTML = lang.infoText;
+            document.getElementById('deescalation-text').innerHTML = lang.deescalationText;
             
             // Update button text
             document.querySelector('.language-toggle').textContent = currentLanguage === 'en' ? '中文' : 'English';
@@ -716,10 +768,70 @@
                 input.className = 'custom-item';
                 item.appendChild(input);
                 item.className = 'item custom-item';
+                
+                // 添加回车键处理
+                input.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter') {
+                        const newText = this.value.trim();
+                        if (newText) {
+                            // 创建一个新的普通条目
+                            const newItem = createItem(newText);
+                            // 将新条目插入到当前自定义条目之前
+                            item.parentNode.insertBefore(newItem, item);
+                            // 清空输入框
+                            this.value = '';
+                        }
+                    }
+                });
             } else {
                 const textDiv = document.createElement('div');
-                textDiv.className = 'item-text';
+                textDiv.className = 'item-text editable';
                 textDiv.textContent = text;
+                textDiv.style.textAlign = 'left'; // 设置文本左对齐
+                
+                // Add double-click to edit functionality
+                textDiv.addEventListener('dblclick', function() {
+                    const currentText = this.textContent;
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.value = currentText;
+                    input.className = 'editing-input';
+                    
+                    // 设置输入框宽度与原文本相同
+                    const textWidth = this.offsetWidth;
+                    input.style.minWidth = textWidth + 'px';
+                    
+                    this.textContent = '';
+                    this.appendChild(input);
+                    input.focus();
+                    
+                    // 自动调整输入框大小
+                    input.style.height = 'auto';
+                    input.style.height = (input.scrollHeight) + 'px';
+                    
+                    function finishEditing() {
+                        const newText = input.value.trim();
+                        if (newText) {
+                            textDiv.textContent = newText;
+                        } else {
+                            textDiv.textContent = currentText;
+                        }
+                    }
+                    
+                    input.addEventListener('blur', finishEditing);
+                    input.addEventListener('keydown', function(e) {
+                        if (e.key === 'Enter') {
+                            finishEditing();
+                        }
+                    });
+                    
+                    // 添加输入事件监听器以自动调整大小
+                    input.addEventListener('input', function() {
+                        this.style.height = 'auto';
+                        this.style.height = (this.scrollHeight) + 'px';
+                    });
+                });
+                
                 item.appendChild(textDiv);
             }
 
@@ -746,6 +858,12 @@
             items.forEach(item => {
                 section.appendChild(createItem(item, item === ''));
             });
+            
+            // 移除以下加号按钮代码
+            // const addButtonDiv = document.createElement('div');
+            // addButtonDiv.className = 'add-item-button';
+            // addButtonDiv.appendChild(addButton);
+            // section.appendChild(addButtonDiv);
         }
 
         // Initialize all sections with English content
